@@ -67,7 +67,7 @@ public class Empresa {
 		
 		for(int i=0; i<listEmpleados.length; i++) {
 			
-			if(listEmpleados[i].getCedula().equals(cedula)) {
+			if(listEmpleados[i] != null && listEmpleados[i].getCedula().equals(cedula)) {
 				
 				return i;
 			}
@@ -190,26 +190,97 @@ public class Empresa {
 				bono+=0.0;
 			}
 			double salarioFinal = salarioBase+(salarioBase*bono);
+			listEmpleados[i].setSalario(salarioFinal);
 			nominaTotal += salarioFinal;
 			
 		}
 		return nominaTotal;
 	}
 	
-	public Empleados[] empleadosSalarioAlto (double nominaTotal) {
-		
-		Empleados [] empleadoSalarioAlto = new Empleados[0];
-		
-		for(int i = 1; i<listEmpleados.length; i++) {
-			
-			if(listEmpleados[i].calcularNomina(nominaTotal) > empleadoSalarioAlto) {
-				
-				empleadoSalarioAlto[listEmpleados] = listEmpleados[i]; 
-			}
-		
-		}
-		
+	public Empleados[] determinarSalarioAlto() {
+	    
+		Empleados[] listaSalarioAlto = obtenerListaNoNull(listEmpleados);
+
+	    for (int i = 0; i < listaSalarioAlto.length - 1; i++) {
+	        
+	    	for (int j = 0; j < listaSalarioAlto.length - 1 - i; j++) {
+	           
+	            if (listaSalarioAlto[j].getSalario() < listaSalarioAlto[j + 1].getSalario()) {
+	               
+	                Empleados auxiliar = listaSalarioAlto[j];
+	                
+	                listaSalarioAlto[j] = listaSalarioAlto[j + 1];
+	                
+	                listaSalarioAlto[j + 1] = auxiliar;
+	            }
+	        }
+	    }
+	    return listaSalarioAlto;
 	}
 	
+	public Empleados[] determinarSalarioBajo() {
+	    
+		Empleados[] listaSalarioBajo = obtenerListaNoNull(listEmpleados);
+
+	    for (int i = 0; i < listaSalarioBajo.length - 1; i++) {
+	    	
+	        for (int j = 0; j < listaSalarioBajo.length - 1 - i; j++) {
+	        	
+	            if (listaSalarioBajo[j].getSalario() > listaSalarioBajo[j + 1].getSalario()) {
+	            	
+	                Empleados auxiliar = listaSalarioBajo[j];
+	                
+	                listaSalarioBajo[j] = listaSalarioBajo[j + 1];
+	                
+	                listaSalarioBajo[j + 1] = auxiliar;
+	            }
+	        }
+	    }
+	    return listaSalarioBajo;
+	}
+	
+	public Empleados[] obtenerListaNoNull (Empleados[] listEmpleados) {
+		
+		int contador = 0;
+		
+		for (int i=0; i<listEmpleados.length; i++) {
+			
+			if (listEmpleados[i] !=null) {
+				
+				contador++;
+			}
+		}
+		
+		Empleados[] listaNoNull = new Empleados[contador];
+		
+		int indice =0;
+		
+		for(int i=0; i<listEmpleados.length; i++) {
+			
+			if(listEmpleados[i] !=null) {
+				
+				listaNoNull[indice] = listEmpleados[i];
+				
+				indice++;
+			}
+		}
+		return listaNoNull;
+	}
+	
+	
+	public Empleados [] cargarDatos() {
+		
+		Empleados[] listEmpleados = new Empleados[5];
+		
+		listEmpleados[0] = new Empleados("Juan", "203343", "Jefe", 10);
+		listEmpleados[1] = new Empleados("Sara", "3443222", "gerente", 4);
+		listEmpleados[2] = new Empleados("Sofia", "435533", "administrador", 1);
+		listEmpleados[3] = new Empleados("Andres", "2034425", "Aseo", 2);
+		listEmpleados[4] = new Empleados("Santiago", "8950433", "administrador", 2);
+		
+		return listEmpleados;
+		
+		
+	}
 	
 }

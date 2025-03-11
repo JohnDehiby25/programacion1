@@ -13,7 +13,6 @@ public class Empleados {
 		this.cedula=cedula;
 		this.cargo = cargo;
 		this.anios= anios;
-		this.salario=0;
 		
 	}
 	public void setNombre(String nombre) {
