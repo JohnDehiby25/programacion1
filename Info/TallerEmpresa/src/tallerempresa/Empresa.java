@@ -168,6 +168,8 @@ public class Empresa {
 		
 		for(int i =0; i<listEmpleados.length; i++) {
 			
+			if(listEmpleados[i] != null) {
+			
 			double salarioBase = salarioSegunCargo(listEmpleados[i].getCargo());
 			
 			int anios = listEmpleados[i].getAnios();
@@ -194,6 +196,7 @@ public class Empresa {
 			nominaTotal += salarioFinal;
 			
 		}
+	}
 		return nominaTotal;
 	}
 	
@@ -268,19 +271,6 @@ public class Empresa {
 	}
 	
 	
-	public Empleados [] cargarDatos() {
-		
-		Empleados[] listEmpleados = new Empleados[5];
-		
-		listEmpleados[0] = new Empleados("Juan", "203343", "Jefe", 10);
-		listEmpleados[1] = new Empleados("Sara", "3443222", "gerente", 4);
-		listEmpleados[2] = new Empleados("Sofia", "435533", "administrador", 1);
-		listEmpleados[3] = new Empleados("Andres", "2034425", "Aseo", 2);
-		listEmpleados[4] = new Empleados("Santiago", "8950433", "administrador", 2);
-		
-		return listEmpleados;
-		
-		
-	}
+	
 	
 }
