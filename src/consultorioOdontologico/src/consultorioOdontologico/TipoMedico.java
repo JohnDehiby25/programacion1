@@ -1,10 +1,10 @@
 package consultorioOdontologico;
 
-public enum EspecialidadOdontologica {
-	
+public enum TipoMedico {
 	ORTODONCIAGENERAL,
 	ORTODONCIA,
 	ENDODONCIA,
 	CIRUGIAORAL;
+	
 
 }
